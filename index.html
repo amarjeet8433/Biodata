@@ -182,6 +182,27 @@
 		.magnify-effect:hover {
 			transform: scale(1.2); /* Zoom in by 20% on hover */
 		}
+		
+		/* Define a media query for screens with a maximum width of 768px (typical for mobile devices) */
+		@media screen and (max-width: 768px) {
+			/* Style for mobile devices */
+			.grid-container {
+				display: block; /* Display grid items as a block */
+				margin-bottom: 10px; /* Add some space between grid items */
+				margin-top: 10px;
+			}
+
+			.grid-item {
+				font-weight: bold;
+				margin-bottom: 5px; /* Add space between grid items */
+				margin-top: 10px;
+			}
+
+			/* Center-align grid items on mobile */
+			.grid-item, .grid-container {
+				text-align: left;
+			}
+		}
     </style>
 </head>
 <body>
