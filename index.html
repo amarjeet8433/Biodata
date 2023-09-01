@@ -302,19 +302,27 @@
         // Define your image sources
         const images = [
             "Image1.jpeg",
-            "your-image.jpeg",
             "your-image.jpeg"
             // Add more image URLs as needed
         ];
 
         let currentIndex = 0;
+		
+		function showImage(index) {
+			if (images.length === 0) return; // Ensure there are images
 
-        function showImage(index) {
-            if (index >= 0 && index < images.length) {
-                popupImage.src = images[index];
-                currentIndex = index;
-            }
-        }
+			if (index >= images.length) {
+				// If the index exceeds the number of images, loop back to the first image
+				index = 0;
+			} else if (index < 0) {
+				// If the index is negative, loop to the last image
+				index = images.length - 1;
+			}
+
+			popupImage.src = images[index];
+			currentIndex = index;
+		}
+
 
         popupTrigger.addEventListener("click", () => {
             currentIndex = 0; // Set the currentIndex to 0
