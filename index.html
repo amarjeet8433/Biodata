@@ -42,7 +42,27 @@
         }
 
         .header img:hover {
-            transform: scale(1.1);
+            --transform: scale(1.1);
+            filter: brightness(0.8); /* Darken image on hover */
+        }
+
+        .profile-image-tooltip {
+			cursor: pointer;
+			position: absolute;
+			background-color: rgba(0, 0, 0, 0.7);
+			color: #fff;
+			padding: 5px;
+			border-radius: 5px;
+			font-size: 12px;
+			bottom: 520px; /* Adjust the bottom spacing as needed */
+			left: 29.1%;
+			transform: translateX(-50%);
+			opacity: 0;
+			transition: opacity 0.3s ease-in-out;
+		}
+
+        .header img:hover + .profile-image-tooltip {
+            opacity: 1; /* Show the tooltip on hover */
         }
 
         .social-icons {
@@ -139,20 +159,20 @@
         }
 
         .popup-image {
-			max-width: 100%;
-			max-height: 100%;
-			margin: 10px auto;
-			transition: transform 3s ease-in-out; /* Add transition for image scaling */
-		}
-		
-		.popup-image-container {
-			flex-grow: 1; /* Expand to fill available vertical space */
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			max-height: 80%; /* Limit the maximum height of the image container */
-			overflow: hidden; /* Hide overflow if the image is taller */
-		}
+            max-width: 100%;
+            max-height: 100%;
+            margin: 10px auto;
+            transition: transform 3s ease-in-out; /* Add transition for image scaling */
+        }
+
+        .popup-image-container {
+            flex-grow: 1; /* Expand to fill available vertical space */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-height: 80%; /* Limit the maximum height of the image container */
+            overflow: hidden; /* Hide overflow if the image is taller */
+        }
 
         .popup-footer {
             display: flex;
@@ -174,49 +194,69 @@
         .popup-nav-button:hover {
             background-color: #0056b3;
         }
-		
-		.magnify-effect {
-			transition: transform 0.3s ease-in-out; /* Add a smooth transition */
-		}
 
-		.magnify-effect:hover {
-			transform: scale(1.2); /* Zoom in by 20% on hover */
-		}
-		
-		/* Define a media query for screens with a maximum width of 768px (typical for mobile devices) */
-		@media screen and (max-width: 768px) {
-			/* Style for mobile devices */
-			.grid-container {
-				display: block; /* Display grid items as a block */
-				margin-bottom: 10px; /* Add some space between grid items */
-				margin-top: 10px;
-			}
+        .magnify-effect {
+            transition: transform 0.3s ease-in-out; /* Add a smooth transition */
+        }
 
-			.grid-item {
-				font-weight: bold;
-				margin-bottom: 5px; /* Add space between grid items */
-				margin-top: 10px;
-			}
+        .magnify-effect:hover {
+            transform: scale(1.2); /* Zoom in by 20% on hover */
+        }
 
-			/* Center-align grid items on mobile */
-			.grid-item, .grid-container {
-				text-align: left;
+        /* Define a media query for screens with a maximum width of 768px (typical for mobile devices) */
+        @media screen and (max-width: 768px) {
+            /* Style for mobile devices */
+			img#popup-trigger {
+				width:35% !important;
 			}
-		}
+			
+			.profile-image-tooltip {
+				cursor: pointer;
+				position: absolute;
+				background-color: rgba(0, 0, 0, 0.7);
+				color: #fff;
+				padding: 5px;
+				border-radius: 5px;
+				font-size: 12px;
+				bottom: 625px; /* Adjust the bottom spacing as needed */
+				left: 20.7%;
+				transform: translateX(-50%);
+				opacity: 1;
+				transition: opacity 0.3s ease-in-out;
+			}
+			
+            .grid-container {
+                display: block; /* Display grid items as a block */
+                margin-bottom: 10px; /* Add some space between grid items */
+                margin-top: 10px;
+            }
+
+            .grid-item {
+                font-weight: bold;
+                margin-bottom: 5px; /* Add space between grid items */
+                margin-top: 10px;
+            }
+
+            /* Center-align grid items on mobile */
+            .grid-item, .grid-container {
+                text-align: left;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header with Image and Social Media Icons -->
-        <div class="header">
-            <img src="your-image.jpeg" alt="amarjeet-singh" style="width: 20%;" id="popup-trigger">
-            <div class="social-icons">
-                <a href="https://www.facebook.com/profile.php?id=100004131939156&mibextid=ZbWKwL" class="fab fa-facebook" target="_blank" rel="noopener noreferrer"></a>
-                <a href="https://instagram.com/amarjeet1997?utm_source=qr&igshid=NGExMmI2YTkyZg==" class="fab fa-instagram" target="_blank" rel="noopener noreferrer"></a>
-                <a href="https://www.linkedin.com/in/amarjeetsinghmumbai" class="fab fa-linkedin" target="_blank" rel="noopener noreferrer"></a>
-            </div>
+<div class="container">
+    <!-- Header with Image and Social Media Icons -->
+    <div class="header">
+        <img src="your-image.jpeg" alt="amarjeet-singh" style="width: 20%;" id="popup-trigger">
+        <span class="profile-image-tooltip">Click to view gallery</span>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=100004131939156&mibextid=ZbWKwL" class="fab fa-facebook" target="_blank" rel="noopener noreferrer"></a>
+            <a href="https://instagram.com/amarjeet1997?utm_source=qr&igshid=NGExMmI2YTkyZg==" class="fab fa-instagram" target="_blank" rel="noopener noreferrer"></a>
+            <a href="https://www.linkedin.com/in/amarjeetsinghmumbai" class="fab fa-linkedin" target="_blank" rel="noopener noreferrer"></a>
         </div>
-        <!-- Biodata Details -->
+    </div>
+    <!-- Biodata Details -->
         <div class="details">
             <div class="subsection">
                 <h2>Personal Details</h2>
@@ -276,85 +316,91 @@
         </div>
     </div>
 
-    <!-- Popup HTML -->
-    <div class="popup-overlay" id="popup">
-        <div class="popup-content">
-            <span class="popup-close" id="popup-close">&times;</span>
-            <div class="popup-image-container">
-                <img src="image1.jpg" alt="Image" class="popup-image magnify-effect" id="popup-image">
-            </div>
-            <div class="popup-footer">
-                <button class="popup-nav-button" id="prev-button"><i class="fas fa-chevron-left"></i> Previous</button>
-                <button class="popup-nav-button" id="next-button">Next <i class="fas fa-chevron-right"></i></button>
-            </div>
+<!-- Popup HTML -->
+<div class="popup-overlay" id="popup">
+    <div class="popup-content">
+        <span class="popup-close" id="popup-close">&times;</span>
+        <div class="popup-image-container">
+            <img src="Image1.jpeg" alt="Image" class="popup-image magnify-effect" id="popup-image">
+        </div>
+        <div class="popup-footer">
+            <button class="popup-nav-button" id="prev-button"><i class="fas fa-chevron-left"></i> Previous</button>
+            <button class="popup-nav-button" id="next-button">Next <i class="fas fa-chevron-right"></i></button>
         </div>
     </div>
+</div>
 
-    <script>
-        // JavaScript to handle the popup
-        const popupTrigger = document.getElementById("popup-trigger");
-        const popup = document.getElementById("popup");
-        const popupClose = document.getElementById("popup-close");
-        const popupImage = document.getElementById("popup-image");
-        const prevButton = document.getElementById("prev-button");
-        const nextButton = document.getElementById("next-button");
+<script>
+    // JavaScript to handle the popup
+    const popupTrigger = document.getElementById("popup-trigger");
+	const onProfileImageTooltip = document.getElementsByClassName("profile-image-tooltip")[0];
+    const popup = document.getElementById("popup");
+    const popupClose = document.getElementById("popup-close");
+    const popupImage = document.getElementById("popup-image");
+    const prevButton = document.getElementById("prev-button");
+    const nextButton = document.getElementById("next-button");
 
-        // Define your image sources
-        const images = [
-            "Image1.jpeg",
-            "Image2.jpeg",
-			"Image3.jpeg",
-			"Image4.jpeg"
-        ];
+    // Define your image sources
+    const images = [
+        "Image1.jpeg",
+        "Image2.jpeg",
+        "Image3.jpeg",
+        "Image4.jpeg"
+    ];
 
-        let currentIndex = 0;
-		
-		function showImage(index) {
-			if (images.length === 0) return; // Ensure there are images
+    let currentIndex = 0;
 
-			if (index >= images.length) {
-				// If the index exceeds the number of images, loop back to the first image
-				index = 0;
-			} else if (index < 0) {
-				// If the index is negative, loop to the last image
-				index = images.length - 1;
-			}
+    function showImage(index) {
+        if (images.length === 0) return; // Ensure there are images
 
-			popupImage.src = images[index];
-			currentIndex = index;
-		}
+        if (index >= images.length) {
+            // If the index exceeds the number of images, loop back to the first image
+            index = 0;
+        } else if (index < 0) {
+            // If the index is negative, loop to the last image
+            index = images.length - 1;
+        }
 
+        popupImage.src = images[index];
+        currentIndex = index;
+    }
 
-        popupTrigger.addEventListener("click", () => {
-            currentIndex = 0; // Set the currentIndex to 0
-			showImage(currentIndex); // Show the first image
-            popup.style.display = "block"; // Show the popup
-        });
-		
-        popupClose.addEventListener("click", () => {
+    popupTrigger.addEventListener("click", () => {
+        currentIndex = 0; // Set the currentIndex to 0
+        showImage(currentIndex); // Show the first image
+        popup.style.display = "block"; // Show the popup
+    });
+	
+	onProfileImageTooltip.addEventListener("click", () => {
+        currentIndex = 0; // Set the currentIndex to 0
+        showImage(currentIndex); // Show the first image
+        popup.style.display = "block"; // Show the popup
+    });
+
+    popupClose.addEventListener("click", () => {
+        popup.style.display = "none"; // Hide the popup
+    });
+
+    prevButton.addEventListener("click", () => {
+        showImage(currentIndex - 1); // Show the previous image
+    });
+
+    nextButton.addEventListener("click", () => {
+        showImage(currentIndex + 1); // Show the next image
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.keyCode === 27) {
+            // ESC key
             popup.style.display = "none"; // Hide the popup
-        });
-
-        prevButton.addEventListener("click", () => {
-            showImage(currentIndex - 1); // Show the previous image
-        });
-
-        nextButton.addEventListener("click", () => {
-            showImage(currentIndex + 1); // Show the next image
-        });
-		
-		document.addEventListener('keydown', function (event) {
-			if (event.keyCode === 27) {
-				// ESC key
-				popup.style.display = "none"; // Hide the popup
-			} else if (event.keyCode === 37) {
-				// Left arrow key
-				showImage(currentIndex - 1);
-			} else if (event.keyCode === 39) {
-				// Right arrow key
-				showImage(currentIndex + 1);
-			}
-		});
-    </script>
+        } else if (event.keyCode === 37) {
+            // Left arrow key
+            showImage(currentIndex - 1);
+        } else if (event.keyCode === 39) {
+            // Right arrow key
+            showImage(currentIndex + 1);
+        }
+    });
+</script>
 </body>
 </html>
