@@ -386,6 +386,7 @@
     ];
 
     let currentIndex = 0;
+	let isPopupOpen = false; // Variable to track popup state
 
     function showImage(index) {
         if (images.length === 0) return; // Ensure there are images
@@ -410,22 +411,31 @@
         currentIndex = 0; // Set the currentIndex to 0
         showImage(currentIndex); // Show the first image
         popup.style.display = "block"; // Show the popup
-		// Add a history state to handle the mobile back button
-		history.pushState({ popupOpen: true }, ''); 
+		if (window.matchMedia("(max-width: 768px)").matches) {
+			isPopupOpen = true; // Update the popup state
+			// Add a history state to handle the mobile back button
+			history.pushState({ popupOpen: true }, ''); 
+		}
     });
 	
 	onProfileImageTooltip.addEventListener("click", () => {
         currentIndex = 0; // Set the currentIndex to 0
         showImage(currentIndex); // Show the first image
         popup.style.display = "block"; // Show the popup
-		// Add a history state to handle the mobile back button
-		history.pushState({ popupOpen: true }, ''); 
+		if (window.matchMedia("(max-width: 768px)").matches) {
+			isPopupOpen = true; // Update the popup state
+			// Add a history state to handle the mobile back button
+			history.pushState({ popupOpen: true }, ''); 
+		}
     });
 
     popupClose.addEventListener("click", () => {
         popup.style.display = "none"; // Hide the popup
-		// Add a history state to handle the mobile back button
-		history.pushState({ popupOpen: false }, '');
+		if (window.matchMedia("(max-width: 768px)").matches) {
+			isPopupOpen = false; // Update the popup state
+			// Add a history state to handle the mobile back button
+			history.pushState({ popupOpen: false }, '');
+		}
     });
 
     prevButton.addEventListener("click", () => {
@@ -440,8 +450,11 @@
         if (event.keyCode === 27) {
             // ESC key
             popup.style.display = "none"; // Hide the popup
-			// Add a history state to handle the mobile back button
-			history.pushState({ popupOpen: false }, '');
+			if (window.matchMedia("(max-width: 768px)").matches) {
+				isPopupOpen = false; // Update the popup state
+				// Add a history state to handle the mobile back button
+				history.pushState({ popupOpen: false }, '');
+			}
         } else if (event.keyCode === 37) {
             // Left arrow key
             showImage(currentIndex - 1);
@@ -455,10 +468,14 @@
 	if (window.matchMedia("(max-width: 768px)").matches) {
 		// Handle the mobile back button press
 		window.addEventListener('popstate', function(event) {
-			if (event.state && event.state.popupOpen) {
+			if (event.state && event.state.popupOpen && !isPopupOpen) {
+				// If the history state indicates the popup should be open, and it's not already open, open it.
 				popup.style.display = "block"; // Show the popup
-			} else {
+				isPopupOpen = true; // Update the popup state
+			} else if (!event.state.popupOpen && isPopupOpen) {
+				// If the history state indicates the popup should be closed, and it's open, close it.
 				popup.style.display = "none"; // Hide the popup
+				isPopupOpen = false; // Update the popup state
 			}
 		});
 	}
