@@ -179,6 +179,7 @@
             justify-content: space-between;
             width: 100%;
             margin-top: 20px;
+			align-items: center;
         }
 
         .popup-nav-button {
@@ -202,6 +203,11 @@
         .magnify-effect:hover {
             transform: scale(1.2); /* Zoom in by 20% on hover */
         }
+		
+		.photo-info {
+			font-size: 1.5em;
+			opacity: 0.5;
+		}
 
         /* Define a media query for screens with a maximum width of 768px (typical for mobile devices) */
         @media screen and (max-width: 768px) {
@@ -324,9 +330,10 @@
             <img src="Image1.jpeg" alt="Image" class="popup-image magnify-effect" id="popup-image">
         </div>
         <div class="popup-footer">
-            <button class="popup-nav-button" id="prev-button"><i class="fas fa-chevron-left"></i> Previous</button>
-            <button class="popup-nav-button" id="next-button">Next <i class="fas fa-chevron-right"></i></button>
-        </div>
+			<button class="popup-nav-button" id="prev-button"><i class="fas fa-chevron-left"></i> Previous</button>
+			<span id="photo-info" class="photo-info"></span>
+			<button class="popup-nav-button" id="next-button">Next <i class="fas fa-chevron-right"></i></button>
+		</div>
     </div>
 </div>
 
@@ -339,6 +346,7 @@
     const popupImage = document.getElementById("popup-image");
     const prevButton = document.getElementById("prev-button");
     const nextButton = document.getElementById("next-button");
+	const photoInfo = document.getElementById("photo-info");
 
     // Define your image sources
     const images = [
@@ -363,6 +371,10 @@
 
         popupImage.src = images[index];
         currentIndex = index;
+		
+		// Update and display the photo number and total photos
+		const photoNumber = currentIndex + 1; // Add 1 to convert from zero-based index to 1-based index
+		photoInfo.textContent = photoNumber + " / " + images.length;
     }
 
     popupTrigger.addEventListener("click", () => {
