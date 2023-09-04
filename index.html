@@ -208,12 +208,16 @@
 			font-size: 1.5em;
 			opacity: 0.5;
 		}
-
-        /* Define a media query for screens with a maximum width of 768px (typical for mobile devices) */
-        @media screen and (max-width: 768px) {
-            /* Style for mobile devices */
+		
+		img#popup-trigger {
+			width:20%;
+		}
+		
+		/* Target mobile screens in landscape orientation */
+		@media screen and (max-width: 768px) and (orientation: landscape) {
+			/* Style for mobile devices */
 			img#popup-trigger {
-				width:35% !important;
+				width:25%;
 			}
 			
 			.profile-image-tooltip {
@@ -224,8 +228,48 @@
 				padding: 5px;
 				border-radius: 5px;
 				font-size: 12px;
-				bottom: 625px; /* Adjust the bottom spacing as needed */
-				left: 20.7%;
+				bottom: 346px; /* Adjust the bottom spacing as needed */
+				left: 14.7%;
+				transform: translateX(-50%);
+				opacity: 1;
+				transition: opacity 0.3s ease-in-out;
+			}
+			
+            .grid-container {
+                display: block; /* Display grid items as a block */
+                margin-bottom: 10px; /* Add some space between grid items */
+                margin-top: 10px;
+            }
+
+            .grid-item {
+                font-weight: bold;
+                margin-bottom: 5px; /* Add space between grid items */
+                margin-top: 10px;
+            }
+
+            /* Center-align grid items on mobile */
+            .grid-item, .grid-container {
+                text-align: left;
+            }
+		}
+
+        /* Define a media query for screens with a maximum width of 768px (typical for mobile devices) */
+        @media screen and (max-width: 768px) and (orientation: portrait) {
+            /* Style for mobile devices */
+			img#popup-trigger {
+				width:35%;
+			}
+			
+			.profile-image-tooltip {
+				cursor: pointer;
+				position: absolute;
+				background-color: rgba(0, 0, 0, 0.7);
+				color: #fff;
+				padding: 5px;
+				border-radius: 5px;
+				font-size: 12px;
+				bottom: 505px; /* Adjust the bottom spacing as needed */
+				left: 19.7%;
 				transform: translateX(-50%);
 				opacity: 1;
 				transition: opacity 0.3s ease-in-out;
@@ -254,7 +298,7 @@
 <div class="container">
     <!-- Header with Image and Social Media Icons -->
     <div class="header">
-        <img src="your-image.jpeg" alt="amarjeet-singh" style="width: 20%;" id="popup-trigger">
+        <img src="your-image.jpeg" alt="amarjeet-singh" id="popup-trigger">
         <span class="profile-image-tooltip">Click to view gallery</span>
         <div class="social-icons">
             <a href="https://www.facebook.com/profile.php?id=100004131939156&mibextid=ZbWKwL" class="fab fa-facebook" target="_blank" rel="noopener noreferrer"></a>
