@@ -37,12 +37,14 @@
             max-width: 100%;
             height: auto;
             border-radius: 10px;
-            transition: transform 0.3s ease-in-out;
             cursor: pointer; /* Add cursor pointer for the image */
+			/* Initial brightness setting */
+			filter: brightness(1);
+			/* Transition for the filter property */
+			transition: filter 0.3s ease-in-out;
         }
 
         .header img:hover {
-            --transform: scale(1.1);
             filter: brightness(0.8); /* Darken image on hover */
         }
 
@@ -234,8 +236,6 @@
 				opacity: 1;
 				transition: opacity 0.3s ease-in-out;
 			}
-			
-            
 		}
 
         /* Define a media query for screens with a maximum width of 768px (typical for mobile devices) */
