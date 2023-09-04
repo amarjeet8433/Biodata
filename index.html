@@ -410,16 +410,22 @@
         currentIndex = 0; // Set the currentIndex to 0
         showImage(currentIndex); // Show the first image
         popup.style.display = "block"; // Show the popup
+		// Add a history state to handle the mobile back button
+		history.pushState({ popupOpen: true }, ''); 
     });
 	
 	onProfileImageTooltip.addEventListener("click", () => {
         currentIndex = 0; // Set the currentIndex to 0
         showImage(currentIndex); // Show the first image
         popup.style.display = "block"; // Show the popup
+		// Add a history state to handle the mobile back button
+		history.pushState({ popupOpen: true }, ''); 
     });
 
     popupClose.addEventListener("click", () => {
         popup.style.display = "none"; // Hide the popup
+		// Add a history state to handle the mobile back button
+		history.pushState({ popupOpen: false }, '');
     });
 
     prevButton.addEventListener("click", () => {
@@ -434,6 +440,8 @@
         if (event.keyCode === 27) {
             // ESC key
             popup.style.display = "none"; // Hide the popup
+			// Add a history state to handle the mobile back button
+			history.pushState({ popupOpen: false }, '');
         } else if (event.keyCode === 37) {
             // Left arrow key
             showImage(currentIndex - 1);
@@ -443,9 +451,11 @@
         }
     });
 	
-	// Close the popup when the mobile back button is pressed
+	// Handle the mobile back button press
 	window.addEventListener('popstate', function(event) {
-		if (popup.style.display === "block") {
+		if (event.state && event.state.popupOpen) {
+			popup.style.display = "block"; // Show the popup
+		} else {
 			popup.style.display = "none"; // Hide the popup
 		}
 	});
