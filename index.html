@@ -442,6 +442,13 @@
             showImage(currentIndex + 1);
         }
     });
+	
+	// Close the popup when the mobile back button is pressed
+	window.addEventListener('popstate', function(event) {
+		if (popup.style.display === "block") {
+			popup.style.display = "none"; // Hide the popup
+		}
+	});
 </script>
 </body>
 </html>
