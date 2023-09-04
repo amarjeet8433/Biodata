@@ -369,24 +369,27 @@
 <script>
     // JavaScript to handle the popup
     const popupTrigger = document.getElementById("popup-trigger");
-	const onProfileImageTooltip = document.getElementsByClassName("profile-image-tooltip")[0];
+    const onProfileImageTooltip = document.getElementsByClassName("profile-image-tooltip")[0];
     const popup = document.getElementById("popup");
     const popupClose = document.getElementById("popup-close");
     const popupImage = document.getElementById("popup-image");
     const prevButton = document.getElementById("prev-button");
     const nextButton = document.getElementById("next-button");
-	const photoInfo = document.getElementById("photo-info");
+    const photoInfo = document.getElementById("photo-info");
 
     // Define your image sources
     const images = [
         "Image1.jpg?t=" + new Date().getTime(),
-		"Image2.jpg?t=" + new Date().getTime(),
-		"Image3.jpg?t=" + new Date().getTime(),
-		"Image4.jpg?t=" + new Date().getTime()
+        "Image2.jpg?t=" + new Date().getTime(),
+        "Image3.jpg?t=" + new Date().getTime(),
+        "Image4.jpg?t=" + new Date().getTime()
     ];
 
     let currentIndex = 0;
-	let isPopupOpen = false; // Variable to track popup state
+    let isPopupOpen = false; // Variable to track popup state
+	let isMobileScreen = false;
+	
+	isMobileScreen = (window.matchMedia("(max-width: 768px)").matches);
 
     function showImage(index) {
         if (images.length === 0) return; // Ensure there are images
@@ -401,41 +404,41 @@
 
         popupImage.src = images[index];
         currentIndex = index;
-		
-		// Update and display the photo number and total photos
-		const photoNumber = currentIndex + 1; // Add 1 to convert from zero-based index to 1-based index
-		photoInfo.textContent = photoNumber + " / " + images.length;
+
+        // Update and display the photo number and total photos
+        const photoNumber = currentIndex + 1; // Add 1 to convert from zero-based index to 1-based index
+        photoInfo.textContent = photoNumber + " / " + images.length;
     }
 
     popupTrigger.addEventListener("click", () => {
         currentIndex = 0; // Set the currentIndex to 0
         showImage(currentIndex); // Show the first image
         popup.style.display = "block"; // Show the popup
-		if (window.matchMedia("(max-width: 768px)").matches) {
-			isPopupOpen = true; // Update the popup state
-			// Add a history state to handle the mobile back button
-			history.pushState({ popupOpen: true }, ''); 
-		}
+        if (isMobileScreen) {
+            isPopupOpen = true; // Update the popup state
+            // Add a history state to handle the mobile back button
+            history.pushState({ popupOpen: true }, '');
+        }
     });
-	
-	onProfileImageTooltip.addEventListener("click", () => {
+
+    onProfileImageTooltip.addEventListener("click", () => {
         currentIndex = 0; // Set the currentIndex to 0
         showImage(currentIndex); // Show the first image
         popup.style.display = "block"; // Show the popup
-		if (window.matchMedia("(max-width: 768px)").matches) {
-			isPopupOpen = true; // Update the popup state
-			// Add a history state to handle the mobile back button
-			history.pushState({ popupOpen: true }, ''); 
-		}
+        if (isMobileScreen) {
+            isPopupOpen = true; // Update the popup state
+            // Add a history state to handle the mobile back button
+            history.pushState({ popupOpen: true }, '');
+        }
     });
 
     popupClose.addEventListener("click", () => {
         popup.style.display = "none"; // Hide the popup
-		if (window.matchMedia("(max-width: 768px)").matches) {
-			isPopupOpen = false; // Update the popup state
-			// Add a history state to handle the mobile back button
-			history.pushState({ popupOpen: false }, '');
-		}
+        if (isMobileScreen) {
+            isPopupOpen = false; // Update the popup state
+            // Add a history state to handle the mobile back button
+            history.pushState({ popupOpen: false }, '');
+        }
     });
 
     prevButton.addEventListener("click", () => {
@@ -450,11 +453,11 @@
         if (event.keyCode === 27) {
             // ESC key
             popup.style.display = "none"; // Hide the popup
-			if (window.matchMedia("(max-width: 768px)").matches) {
-				isPopupOpen = false; // Update the popup state
-				// Add a history state to handle the mobile back button
-				history.pushState({ popupOpen: false }, '');
-			}
+            if (isMobileScreen) {
+                isPopupOpen = false; // Update the popup state
+                // Add a history state to handle the mobile back button
+                history.pushState({ popupOpen: false }, '');
+            }
         } else if (event.keyCode === 37) {
             // Left arrow key
             showImage(currentIndex - 1);
@@ -463,22 +466,22 @@
             showImage(currentIndex + 1);
         }
     });
-	
-	// Apply the mobile back button handling only for mobile devices
-	if (window.matchMedia("(max-width: 768px)").matches) {
-		// Handle the mobile back button press
-		window.addEventListener('popstate', function(event) {
-			if (event.state && event.state.popupOpen && !isPopupOpen) {
-				// If the history state indicates the popup should be open, and it's not already open, open it.
-				popup.style.display = "block"; // Show the popup
-				isPopupOpen = true; // Update the popup state
-			} else if (!event.state.popupOpen && isPopupOpen) {
-				// If the history state indicates the popup should be closed, and it's open, close it.
-				popup.style.display = "none"; // Hide the popup
-				isPopupOpen = false; // Update the popup state
-			}
-		});
-	}
+
+    // Apply the mobile back button handling only for mobile devices
+    if (isMobileScreen) {
+        // Handle the mobile back button press
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.popupOpen && !isPopupOpen) {
+                // If the history state indicates the popup should be open, and it's not already open, open it.
+                popup.style.display = "block"; // Show the popup
+                isPopupOpen = true; // Update the popup state
+            } else if (!event.state.popupOpen && isPopupOpen) {
+                // If the history state indicates the popup should be closed, and it's open, close it.
+                popup.style.display = "none"; // Hide the popup
+                isPopupOpen = false; // Update the popup state
+            }
+        });
+    }
 </script>
 </body>
 </html>
