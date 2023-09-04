@@ -451,14 +451,17 @@
         }
     });
 	
-	// Handle the mobile back button press
-	window.addEventListener('popstate', function(event) {
-		if (event.state && event.state.popupOpen) {
-			popup.style.display = "block"; // Show the popup
-		} else {
-			popup.style.display = "none"; // Hide the popup
-		}
-	});
+	// Apply the mobile back button handling only for mobile devices
+	if (window.matchMedia("(max-width: 768px)").matches) {
+		// Handle the mobile back button press
+		window.addEventListener('popstate', function(event) {
+			if (event.state && event.state.popupOpen) {
+				popup.style.display = "block"; // Show the popup
+			} else {
+				popup.style.display = "none"; // Hide the popup
+			}
+		});
+	}
 </script>
 </body>
 </html>
