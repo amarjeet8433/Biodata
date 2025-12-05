@@ -284,7 +284,7 @@
     <!-- Header with Image and Social Media Icons -->
     <div class="header">
         <img src="your-image.jpeg" alt="amarjeet-singh" id="popup-trigger">
-        <span class="profile-image-tooltip">Click to view gallery</span>
+        <!--<span class="profile-image-tooltip">Click to view gallery</span>-->
         <div class="social-icons">
             <a href="https://www.facebook.com/profile.php?id=100004131939156&mibextid=ZbWKwL" class="fab fa-facebook" target="_blank" rel="noopener noreferrer"></a>
             <a href="https://instagram.com/amarjeet1997?utm_source=qr&igshid=NGExMmI2YTkyZg==" class="fab fa-instagram" target="_blank" rel="noopener noreferrer"></a>
@@ -375,9 +375,8 @@
 	const popupImage = document.getElementById("popup-image");
 	const prevButton = document.getElementById("prev-button");
 	const nextButton = document.getElementById("next-button");
-	const photoInfo = document.getElementById("photo-info");
-
-	// Define your image sources
+	const photoInfo = document.getElementById("photo-infconst	// Define your image sources
+	/*
 	const images = [
 		//"Image1.jpg?t=" + new Date().getTime(),
 		//"Image2.jpg?t=" + new Date().getTime(),
@@ -386,6 +385,7 @@
 		"Image5.jpeg?t=" + new Date().getTime(),
 		"Image6.jpeg?t=" + new Date().getTime()
 	];
+	*/
 
 	let currentIndex = 0;
 	let isPopupOpen = false; // Variable to track popup state
@@ -486,4 +486,5 @@
 </script>
 </body>
 </html>
+
 
